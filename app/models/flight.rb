@@ -3,4 +3,7 @@ class Flight < ApplicationRecord
   has_one :departure
   has_one :arrival_airport, through: :arrival, source: :airport
   has_one :departure_airport, through: :departure, source: :airport
+
+  validates :arrival, presence: true
+  validates :departure, presence: true
 end
