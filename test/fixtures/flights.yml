@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  depart_time: 2024-09-27 13:09:16
+  duration: 2024-09-27 13:09:16
+
+two:
+  depart_time: 2024-09-27 13:09:16
+  duration: 2024-09-27 13:09:16
