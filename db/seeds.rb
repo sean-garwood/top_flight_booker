@@ -14,7 +14,7 @@ airport_codes.each do |code|
   Airport.find_or_create_by!(code: code)
 end
 
-flight = Flight.find_or_create_by!(depart_time: "2024-09-27 17:00:00", duration: "3:00:00")
+flight = Flight.find_or_create_by!(depart_time: "2024-09-27 17:00:00", duration: 323)
 
 dep = Departure.find_or_create_by!(flight: flight, airport: Airport.find_by(code: "BWI"))
 arr = Arrival.find_or_create_by!(flight: flight, airport: Airport.find_by(code: "LAX"))
