@@ -1,0 +1,30 @@
+<h2 class="flight-results">
+  flight results
+</h2>
+<table>
+  <td class="flights">
+    <tr>
+      <th>Departs from</th>
+      <th>Arrives at</th>
+      <th>Depart time</th>
+      <th>Duration</th>
+    </tr>
+    <% @flights.each do |flight| %>
+      <tr>
+        <td>
+          <%= flight.departure_airport.code %>
+        </td>
+        <td>
+          <%= flight.arrival_airport.code %>
+        </td>
+        <td>
+          <%= flight.depart_time %>
+        </td>
+        <td>
+          <%# duration is in minutes, so we need to format as HH:MM %>
+          <%= Time.at(flight.duration * 60).utc.strftime("%H:%M") %>
+        </td>
+      </tr>
+    <% end %>
+  </td>
+</table>
