@@ -12,4 +12,20 @@ class Flight < ApplicationRecord
       all
     end
   end
+
+  scope :search_by_date, ->(date) do
+    if date.present?
+      where("flights.depart_date BETWEEN ? AND ?", date.beginning_of_day, date.end_of_day)
+    else
+      all
+    end
+  end
+
+  scope :search_by_passengers, ->(passengers) do
+    if passengers.present?
+      where("flights.available_seats >= ?", passengers)
+    else
+      all
+    end
+  end
 end
