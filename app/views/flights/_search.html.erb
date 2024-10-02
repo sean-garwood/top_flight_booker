@@ -1,6 +1,14 @@
 <h2>Enter your desired flight attributes here.</h2>
-<%= form_with url: "/flights", method: :get do |form| %>
-  <%= select_tag(:arrival_airport, options_for_select(@airports)) %>
-  <%= select_tag(:departure_airport, options_for_select(@airports)) %>
-  <%= form.submit "Search flights" %>
+<%= form_with url: flights_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :departure_airport, "Departure Airport" %>
+    <%= select_tag :departure_airport, options_for_select(@airports) %>
+  </div>
+  <div>
+    <%= label_tag :arrival_airport, "Arrival Airport" %>
+    <%= select_tag :arrival_airport, options_for_select(@airports) %>
+  </div>
+  <div>
+    <%= submit_tag "Search flights" %>
+  </div>
 <% end %>
