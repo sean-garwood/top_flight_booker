@@ -12,4 +12,8 @@ class Flight < ApplicationRecord
       all
     end
   end
+
+  scope :available, ->(seats) { where("available_seats >= ?", seats) if seats.present? }
+
+  scope :departs_at, ->(time) { where("depart_time >= ?", time) if time.present? }
 end

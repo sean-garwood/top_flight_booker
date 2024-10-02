@@ -9,6 +9,14 @@
     <%= select_tag :arrival_airport, options_for_select(@airports) %>
   </div>
   <div>
+    <%= label_tag :available_seats, "Number of passengers" %>
+    <%= text_field_tag :available_seats %>
+  </div>
+  <div>
+    <%= label_tag :depart_date, "Departure date" %>
+    <%= date_field_tag :depart_date %>
+  </div>
+  <div>
     <%= submit_tag "Search flights" %>
   </div>
 <% end %>
