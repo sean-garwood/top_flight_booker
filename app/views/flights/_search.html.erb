@@ -10,11 +10,11 @@
   </div>
   <div>
     <%= form.label :available_seats, "Number of passengers" %>
-    <%= form.number_field :available_seats %>
+    <%= form.select :available_seats, options_for_select((1..4)) %>
   </div>
   <div>
     <%= form.label :depart_date, "Departure date" %>
-    <%= form.date_field :depart_date %>
+    <%= form.select :depart_date, options_for_select(@departure_dates) %>
   </div>
   <div>
     <%= form.submit "Search flights" %>
