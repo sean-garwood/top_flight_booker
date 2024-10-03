@@ -1,22 +1,22 @@
 <h2>Enter your desired flight attributes here.</h2>
-<%= form_with url: flights_path, method: :get, local: true do %>
+<%= form_with model: @flights, url: flights_path, method: :get, local: true do |form| %>
   <div>
-    <%= label_tag :departure_airport, "Departure Airport" %>
-    <%= select_tag :departure_airport, options_for_select(@airports) %>
+    <%= form.label :departure_airport, "Departure Airport" %>
+    <%= form.select :departure_airport, options_for_select(@airports) %>
   </div>
   <div>
-    <%= label_tag :arrival_airport, "Arrival Airport" %>
-    <%= select_tag :arrival_airport, options_for_select(@airports) %>
+    <%= form.label :arrival_airport, "Arrival Airport" %>
+    <%= form.select :arrival_airport, options_for_select(@airports) %>
   </div>
   <div>
-    <%= label_tag :available_seats, "Number of passengers" %>
-    <%= text_field_tag :available_seats %>
+    <%= form.label :available_seats, "Number of passengers" %>
+    <%= form.number_field :available_seats %>
   </div>
   <div>
-    <%= label_tag :depart_date, "Departure date" %>
-    <%= date_field_tag :depart_date %>
+    <%= form.label :depart_date, "Departure date" %>
+    <%= form.date_field :depart_date %>
   </div>
   <div>
-    <%= submit_tag "Search flights" %>
+    <%= form.submit "Search flights" %>
   </div>
 <% end %>

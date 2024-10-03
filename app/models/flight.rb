@@ -15,7 +15,8 @@ class Flight < ApplicationRecord
 
   scope :search_by_date, ->(date) do
     if date.present?
-      where("flights.depart_date BETWEEN ? AND ?", date.beginning_of_day, date.end_of_day)
+      where("flights.depart_time >= ? AND flights.depart_time <= ?",
+            date.to_date.beginning_of_day, date.to_date.end_of_day)
     else
       all
     end
