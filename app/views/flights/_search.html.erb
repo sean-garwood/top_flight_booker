@@ -1,20 +1,21 @@
 <h2>Enter your desired flight attributes here.</h2>
-<%= form_with model: @flights, url: flights_path, method: :get, local: true do |form| %>
+<%= form_with url: flights_path, method: :get, local: true do |form| %>
   <div>
     <%= form.label :departure_airport, "Departure Airport" %>
-    <%= form.select :departure_airport, options_for_select(@airports) %>
+    <%= form.select :departure_airport, options_for_select(@airports.map { |code, id| [code, id] }) %>
   </div>
   <div>
     <%= form.label :arrival_airport, "Arrival Airport" %>
-    <%= form.select :arrival_airport, options_for_select(@airports) %>
+    <%= form.select :arrival_airport, options_for_select(@airports.map { |code,
+    id| [code, id] }) %>
   </div>
   <div>
     <%= form.label :available_seats, "Number of passengers" %>
-    <%= form.select :available_seats, options_for_select((1..4)) %>
+    <%= form.select :available_seats, options_for_select((1..4).to_a) %>
   </div>
   <div>
     <%= form.label :depart_date, "Departure date" %>
-    <%= form.select :depart_date, options_for_select(@departure_dates) %>
+    <%= form.select :depart_date, options_for_select(@departure_dates.map { |date, value| [date, value] }) %>
   </div>
   <div>
     <%= form.submit "Search flights" %>
