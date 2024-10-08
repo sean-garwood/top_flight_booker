@@ -1,11 +1,12 @@
 class FlightsController < ApplicationController
   def index
-    @airports = Airport.all.pluck(:code, :id)
+    @airports = Airport.all.pluck(:code, :id).map { |code, id| [ code, id ] }
     @departure_dates = get_departure_dates
     @flights = Flight.search_by_airports(
                flight_params[:departure_airport], flight_params[:arrival_airport]).
                search_by_date(flight_params[:depart_date]).
                search_by_passengers(flight_params[:available_seats])
+    @available_seats = (1..4).to_a
   end
 
   private
