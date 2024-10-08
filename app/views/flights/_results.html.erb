@@ -1,34 +1,42 @@
 <h2 class="flight-results">
   Flight results
 </h2>
-<table>
-  <td class="flights">
-    <tr>
-      <th>Departs from</th>
-      <th>Arrives at</th>
-      <th>Depart time</th>
-      <th>Duration</th>
-      <th>Available seats</th>
-    </tr>
-    <% @flights.each do |flight| %>
+<%= form_with url: bookings_path, method: :post, local: true do |form| %>
+  <table>
+    <thead>
       <tr>
-        <td>
-          <%= flight.departure_airport.code %>
-        </td>
-        <td>
-          <%= flight.arrival_airport.code %>
-        </td>
-        <td>
-          <%= flight.depart_time %>
-        </td>
-        <td>
-          <%# duration is in minutes, so we need to format as HH:MM %>
-          <%= Time.at(flight.duration * 60).utc.strftime("%H:%M") %>
-        </td>
-        <td>
-          <%= flight.available_seats %>
-        </td>
+        <th>Departs from</th>
+        <th>Arrives at</th>
+        <th>Depart time</th>
+        <th>Duration</th>
+        <th>Available seats</th>
+        <th>Select</th>
       </tr>
-    <% end %>
-  </td>
-</table>
+    </thead>
+    <tbody>
+      <% @flights.each do |flight| %>
+        <tr>
+          <td>
+            <%= flight.departure_airport.code %>
+          </td>
+          <td>
+            <%= flight.arrival_airport.code %>
+          </td>
+          <td>
+            <%= flight.depart_time %>
+          </td>
+          <td>
+            <%= Time.at(flight.duration * 60).utc.strftime("%H:%M") %>
+          </td>
+          <td>
+            <%= flight.available_seats %>
+          </td>
+          <td>
+            <%= form.radio_button :selected_flight_id, flight.id %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= form.submit "Book Selected Flight" %>
+<% end %>

@@ -17,9 +17,9 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <div>
-      <% flash.each do |msg| %>
-        <div><%= msg %></div>
+    <div class="flash-messages">
+      <% flash.each do |k, message| %>
+        <div class="flash <%= k %>"><%= message %></div>
       <% end %>
     </div>
     <%= yield %>
