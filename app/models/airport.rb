@@ -1,22 +1,15 @@
 class Airport < ApplicationRecord
-  has_many :arrivals
-  has_many :departures
-  has_many :arriving_flights, through: :arrivals, source: :flight
-  has_many :departing_flights, through: :departures, source: :flight
+  has_many :departing_flights, class_name: "Flight", foreign_key: "departure_airport_id"
+  has_many :arriving_flights, class_name: "Flight", foreign_key: "arrival_airport_id"
 
   validates :code, presence: true
 
   # provide airport codes to be displayed
-  private
-
   def self.arrival_codes
-    Airport.joins(:arrivals).pluck(:code).uniq.to_a.sort
+    joins(:arriving_flights).distinct.pluck(:code).to_a.sort
   end
 
   def self.departure_codes
-    Airport.joins(:departures).pluck(:code).uniq.to_a.sort
+    joins(:departing_flights).distinct.pluck(:code).to_a.sort
   end
-
-  scope :departure_airports, -> { joins(:departures).distinct }
-  scope :arrival_airports, -> { joins(:arrivals).distinct }
 end

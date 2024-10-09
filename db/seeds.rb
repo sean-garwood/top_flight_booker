@@ -27,20 +27,6 @@ def make_flights
   end
 end
 
-def make_departures
-  Flight.all.each do |flight|
-    Departure.find_or_create_by!(airport: flight.departure_airport, flight: flight)
-  end
-end
-
-def make_arrivals
-  Flight.all.each do |flight|
-    Arrival.find_or_create_by!(airport: flight.arrival_airport, flight: flight)
-  end
-end
-
 make_airports
 make_flights
-make_departures
-make_arrivals
 puts "Seeded #{Flight.count} flights"

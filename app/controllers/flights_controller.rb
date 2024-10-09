@@ -1,13 +1,9 @@
 class FlightsController < ApplicationController
   def index
     @arrival_codes = Airport.arrival_codes
-    Rails.logger.debug "Arrival codes: #{@arrival_codes}"
     @departure_codes = Airport.departure_codes
-    Rails.logger.debug "Departure codes: #{@departure_codes}"
     @departure_dates = Flight.departure_dates
-    Rails.logger.debug "Departure dates: #{@departure_dates}"
     @available_seats = (1..4).to_a
-    Rails.logger.debug "Available seats: #{@available_seats}"
     if flight_params.empty?
       @flights = Flight.all
     else
