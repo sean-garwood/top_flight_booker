@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require_flight_table
  */
 .flash {
     padding: 10px;

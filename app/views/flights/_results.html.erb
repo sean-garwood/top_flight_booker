@@ -1,7 +1,7 @@
 <h2 class="flight-results">
   Flight results
 </h2>
-<%= form_with url: bookings_path, method: :post, local: true do |form| %>
+<%= form_with model: @booking, url: bookings_path, local: true do |form| %>
   <table>
     <thead>
       <tr>
@@ -14,29 +14,36 @@
       </tr>
     </thead>
     <tbody>
-      <% @flights.each do |flight| %>
+      <% if @flights.present? %>
+        <% @flights.each do |flight| %>
+          <tr>
+            <td>
+              <%= flight.departure_airport.code %>
+            </td>
+            <td>
+              <%= flight.arrival_airport.code %>
+            </td>
+            <td>
+              <%= flight.depart_time %>
+            </td>
+            <td>
+              <%= Time.at(flight.duration * 60).utc.strftime("%H:%M") %>
+            </td>
+            <td>
+              <%= flight.available_seats %>
+            </td>
+            <td>
+              <%= form.radio_button :flight_id, flight.id %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
         <tr>
-          <td>
-            <%= flight.departure_airport.code %>
-          </td>
-          <td>
-            <%= flight.arrival_airport.code %>
-          </td>
-          <td>
-            <%= flight.depart_time %>
-          </td>
-          <td>
-            <%= Time.at(flight.duration * 60).utc.strftime("%H:%M") %>
-          </td>
-          <td>
-            <%= flight.available_seats %>
-          </td>
-          <td>
-            <%= form.radio_button :selected_flight_id, flight.id %>
-          </td>
+          <td colspan="6">None found.</td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <%= form.submit "Book Selected Flight" %>
+  <%= link_to "Show all", flights_path %>
 <% end %>

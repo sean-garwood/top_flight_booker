@@ -2,11 +2,11 @@
 <%= form_with url: flights_path, method: :get, local: true do |form| %>
   <div>
     <%= form.label :departure_airport, "Departure Airport" %>
-    <%= form.select :departure_airport, options_for_select(@airports) %>
+    <%= form.select :departure_airport, options_for_select(@departure_codes) %>
   </div>
   <div>
     <%= form.label :arrival_airport, "Arrival Airport" %>
-    <%= form.select :arrival_airport, options_for_select(@airports) %>
+    <%= form.select :arrival_airport, options_for_select(@arrival_codes) %>
   </div>
   <div>
     <%= form.label :available_seats, "Number of passengers" %>
@@ -14,7 +14,7 @@
   </div>
   <div>
     <%= form.label :depart_date, "Departure date" %>
-    <%= form.select :depart_date, options_for_select(@departure_dates.map { |date, value| [date, value] }) %>
+    <%= form.select :depart_date, options_for_select(@departure_dates) %>
   </div>
   <div>
     <%= form.submit "Search flights" %>

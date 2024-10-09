@@ -1,0 +1,8 @@
+/* styling for flight results */
+.flight-results {
+
+    /* banded rows */
+    tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+}
