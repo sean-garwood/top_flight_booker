@@ -37,5 +37,8 @@ class Flight < ApplicationRecord
   end
 
   def self.search(departure_airport_code, arrival_airport_code, depart_date, available_seats)
+    search_by_airports(departure_airport_code, arrival_airport_code).
+      search_by_depart_date(depart_date).
+      search_by_available_seats(available_seats)
   end
 end
