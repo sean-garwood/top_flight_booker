@@ -14,6 +14,13 @@
  *= require_self
  *= require_flight_table
  */
+* {
+    /* better font */
+    font-family: 'Open Sans', sans-serif;
+    /* rm link formatting */
+    text-decoration: none;
+}
+
 .flash {
     padding: 10px;
     margin-bottom: 10px;

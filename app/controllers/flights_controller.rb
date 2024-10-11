@@ -1,9 +1,5 @@
 class FlightsController < ApplicationController
   def index
-    @arrival_codes = Airport.arrival_codes
-    @departure_codes = Airport.departure_codes
-    @departure_dates = Flight.departure_dates
-    @available_seats = (1..4).to_a
     if flight_params.empty?
       @flights = Flight.all
     else

@@ -19,8 +19,13 @@ class Flight < ApplicationRecord
     end
   end
 
+  def self.available_seats
+    select(:available_seats).map(&:available_seats).uniq.sort
+  end
+
   def self.departure_dates
-    select("DISTINCT DATE(flights.depart_time) as depart_date").order("depart_date").map(&:depart_date)
+    select("DISTINCT DATE(flights.depart_time) as depart_date").
+      order("depart_date").map(&:depart_date)
   end
 
   def self.search_by_airports(departure_airport_code, arrival_airport_code)
