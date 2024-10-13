@@ -1,5 +1,6 @@
 class FlightsController < ApplicationController
   def index
+    @booking = Booking.new
     if flight_params.empty?
       @flights = Flight.all
     else

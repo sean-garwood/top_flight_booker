@@ -1,7 +1,7 @@
 <h2>
   Flight results
 </h2>
-<%= form_with model: @booking, url: new_booking_path do |form| %>
+<%= form_with model: @booking, action: :new do |form| %>
   <table class="flight-results">
     <thead>
       <tr>
@@ -44,6 +44,6 @@
       <% end %>
     </tbody>
   </table>
-  <%= form.submit "Book Selected Flight" %>
+  <%= form.submit "Book Selected Flight", data: { turbo: false } %>
 <% end %>
 <%= link_to "Show all", flights_path %>

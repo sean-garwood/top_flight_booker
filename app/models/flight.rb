@@ -3,6 +3,8 @@ class Flight < ApplicationRecord
   belongs_to :arrival_airport, class_name: "Airport", foreign_key: "arrival_airport_id"
   has_many :bookings
 
+  accepts_nested_attributes_for :bookings
+
   scope :arrival_airports, ->(arrival_airport_code) do
     if arrival_airport_code.present?
       joins(:arrival_airport).where("airports.code = ?", arrival_airport_code)

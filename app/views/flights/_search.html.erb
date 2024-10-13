@@ -3,7 +3,8 @@
   <div>Depart from:
     <%= form.select :departure_airport, Airport.departure_codes, include_blank:
     true %></div>
-  <div>Arrive at:
+  <div>
+    <%= form.label :arrival_airport_id %>
     <%= form.select :arrival_airport, Airport.arrival_codes,
     include_blank: true %></div>
   <div>Required seats:
