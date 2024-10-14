@@ -1,17 +1,6 @@
 <h1>new booking</h1>
 <%= render partial: 'info' %>
+<h2>Passenger info</h2>
 <p>enter passenger information below:</p>
-<%# a form to book a flight. will receive number of passengers in dropdown %>
 <%= form_with model: @booking do |booking_form| %>
-  <div>
-    <%= booking_form.label :flight_id %>
-    <%= booking_form.collection_select :flight_id, Flight.all, :id, :depart_time %>
-  </div>
-  <div>
-    <%= booking_form.label :number_of_passengers %>
-    <%= booking_form.select :number_of_passengers, 1..10 %>
-  </div>
-  <div>
-    <%= booking_form.submit %>
-  </div>
 <% end %>

@@ -35,6 +35,8 @@
             <td>
               <%= form.label :flight_id %>
               <%= form.radio_button :flight_id, flight.id %>
+              <%= form.hidden_field(:number_of_tickets, value:
+              (params[:available_seats] || flight.available_seats)) %>
             </td>
           </tr>
         <% end %>
