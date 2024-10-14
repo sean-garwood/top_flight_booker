@@ -2,8 +2,7 @@ class Flight < ApplicationRecord
   belongs_to :departure_airport, class_name: "Airport", foreign_key: "departure_airport_id"
   belongs_to :arrival_airport, class_name: "Airport", foreign_key: "arrival_airport_id"
   has_many :bookings
-
-  accepts_nested_attributes_for :bookings
+  has_many :passengers, through: :bookings, class_name: "User", foreign_key: "passenger_id"
 
   scope :arrival_airports, ->(arrival_airport_code) do
     if arrival_airport_code.present?
@@ -20,6 +19,19 @@ class Flight < ApplicationRecord
       all
     end
   end
+
+  # a readable string representation of the flight arrival time
+  def arrival_time
+    arr = depart_time.localtime + duration.minutes
+    arr.strftime("%Y-%m-%d %H:%M")
+  end
+
+  # a readable string representation of the flight departure time
+  def departure_time
+    depart_time.localtime.strftime("%Y-%m-%d %H:%M")
+  end
+
+  private
 
   def self.available_seats
     select(:available_seats).map(&:available_seats).uniq.sort

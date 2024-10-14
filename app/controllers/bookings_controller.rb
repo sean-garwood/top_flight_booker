@@ -1,6 +1,8 @@
 class BookingsController < ApplicationController
   def new
-    @booking = Booking.new
+    Rails.logger.debug { "\e[1;31mparams: #{params}\nbooking params: #{booking_params}\e[0m" }
+    @flight = Flight.find(booking_params[:flight_id])
+    @booking = Booking.new(booking_params)
   end
 
   def create

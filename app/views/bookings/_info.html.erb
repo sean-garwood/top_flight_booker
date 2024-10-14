@@ -1,0 +1,9 @@
+<h2>Flight info</h2>
+<p>here's a summary of your flight information:</p>
+<ul class="flight-info">
+  <li>Departs from: <%= @flight.departure_airport.code %></li>
+  <li>Departure date: <%= @flight.departure_time %></li>
+  <li>Arrives at: <%= @flight.arrival_airport.code %></li>
+  <li>Arrival time: <%= @flight.arrival_time %></li>
+  <li>Available seats: <%= @flight.available_seats %></li>
+</ul>
