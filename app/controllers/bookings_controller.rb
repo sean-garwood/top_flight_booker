@@ -1,12 +1,11 @@
 class BookingsController < ApplicationController
   def new
     Rails.logger.debug { "\e[1;31mparams: #{params.inspect}\nbooking params: #{booking_params.inspect}\e[0m" }
+    @booking = Booking.new
     @flight = Flight.find(booking_params[:flight_id])
-    @booking = Booking.new(booking_params)
   end
 
   def create
-    @booking = Booking.new(booking_params)
     @booking.passenger = current_user
     if @booking.save
       flash[:notice] = "Booking created!"
