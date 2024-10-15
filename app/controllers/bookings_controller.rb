@@ -22,11 +22,4 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:flight_id, :passenger_id, :number_of_tickets)
   end
-
-  def logged_in_user
-    unless current_user
-      flash[:danger] = "Please log in."
-      redirect_to root_path, status: :unauthorized
-    end
-  end
 end
