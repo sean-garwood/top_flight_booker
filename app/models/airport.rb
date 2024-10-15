@@ -4,11 +4,6 @@ class Airport < ApplicationRecord
 
   validates :code, presence: true, format: { with: /\A[A-Z]{3}\z/, message: "must be three uppercase letters" }
 
-  def self.arrival_codes
-    joins(:arriving_flights).distinct.pluck(:code).sort
-  end
-
-  def self.departure_codes
-    joins(:departing_flights).distinct.pluck(:code).sort
-  end
+  scope :arrival_codes, -> { joins(:arriving_flights).distinct.pluck(:code).sort }
+  scope :departure_codes, -> { joins(:departing_flights).distinct.pluck(:code).sort }
 end
