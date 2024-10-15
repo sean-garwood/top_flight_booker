@@ -1,18 +1,18 @@
 class Booking < ApplicationRecord
-  belongs_to :passenger, class_name: "User", foreign_key: "passenger_id"
   belongs_to :flight
+  has_and_belongs_to_many :passengers
 
-  validates :passenger_id, :flight_id, presence: true
+  validates :flight_id, presence: true
 
   after_create :decrement_seats
 
-  accepts_nested_attributes_for :passenger
+  accepts_nested_attributes_for :passengers
 
   private
 
   # TODO: determine passengers arg
-  def decrement_seats(passengers = 1)
-    flight.available_seats -= passengers
+  def decrement_seats
+    flight.available_seats -= passengers.count
     flight.save
   end
 end

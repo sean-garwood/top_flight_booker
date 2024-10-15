@@ -5,6 +5,9 @@ DAYS_UNTIL_DEPARTURE_RANGE = (1..30)
 DURATION_RANGE = (30..1200)
 FLIGHTS_COUNT = 10
 MINUTES_IN_DAY = 1440
+PASSENGER_NAMES = [ "Alice", "Bob", "Charlie", "David", "Eve",
+                    "Frank", "Grace", "Heidi", "Ivan", "Judy" ]
+PASSENGER_EMAILS = PASSENGER_NAMES.map { |name| name.downcase + "@example.com" }
 
 def make_airports
   airport_codes = DEPARTURE_AIRPORT_CODES + ARRIVAL_AIRPORT_CODES
@@ -27,6 +30,15 @@ def make_flights
   end
 end
 
+def make_passengers
+  PASSENGER_NAMES.each do |name|
+    Passenger.create!(name: name, email: name.downcase + "@example.com")
+  end
+end
+
 make_airports
+puts "Seeded #{Airport.count} airports"
 make_flights
 puts "Seeded #{Flight.count} flights"
+make_passengers
+puts "Seeded #{Passenger.count} passengers"

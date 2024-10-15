@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_11_205934) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_15_112708) do
   create_table "airports", force: :cascade do |t|
     t.string "code"
     t.datetime "created_at", null: false
@@ -26,6 +26,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_11_205934) do
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
   end
 
+  create_table "bookings_passengers", id: false, force: :cascade do |t|
+    t.integer "booking_id", null: false
+    t.integer "passenger_id", null: false
+    t.index ["booking_id"], name: "index_bookings_passengers_on_booking_id"
+    t.index ["passenger_id"], name: "index_bookings_passengers_on_passenger_id"
+  end
+
   create_table "flights", force: :cascade do |t|
     t.datetime "depart_time"
     t.integer "duration"
@@ -38,20 +45,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_11_205934) do
     t.index ["departure_airport_id"], name: "index_flights_on_departure_airport_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "passengers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "bookings", "flights"
-  add_foreign_key "bookings", "users", column: "passenger_id"
   add_foreign_key "flights", "airports", column: "arrival_airport_id"
   add_foreign_key "flights", "airports", column: "departure_airport_id"
 end
