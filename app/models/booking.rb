@@ -3,8 +3,6 @@ class Booking < ApplicationRecord
   belongs_to :flight
 
   validates :passenger_id, :flight_id, presence: true
-  # ensure flight has avaialble seats > 0
-  validate :decrement_seats
 
   after_create :decrement_seats
 
