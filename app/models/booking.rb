@@ -10,7 +10,6 @@ class Booking < ApplicationRecord
 
   private
 
-  # TODO: determine passengers arg
   def decrement_seats
     flight.available_seats -= passengers.count
     flight.save
