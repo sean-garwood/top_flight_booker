@@ -1,6 +1,5 @@
 class BookingsController < ApplicationController
   def new
-    Rails.logger.debug { "\e[1;31mparams: #{params.inspect}\nbooking params: #{booking_params.inspect}\e[0m" }
     @flight = Flight.find(booking_params[:flight_id])
     @booking = Booking.new(booking_params)
   end
@@ -20,6 +19,9 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:flight_id, :passenger_id, :number_of_tickets)
+    params.require(:booking).permit(
+      :flight_id,
+      :number_of_tickets,
+      passengers_attributes: [ :name, :email ])
   end
 end
