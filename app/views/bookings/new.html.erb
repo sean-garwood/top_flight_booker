@@ -1,6 +1,15 @@
 <h1>new booking</h1>
 <%= render partial: 'info' %>
-<h2>Passenger info</h2>
+<h2>Passengers</h2>
 <p>enter passenger information below:</p>
 <%= form_with model: @booking do |booking_form| %>
+  <%= booking_form.hidden_field :flight_id, value: @flight.id %>
+  <%= booking_form.hidden_field :number_of_tickets, value: params[:number_of_tickets] %>
+  <%= booking_form.fields_for :passengers do |passenger_form| %>
+    <div class="passenger">
+      <%= passenger_form.text_field :name, ignore: :blank %>
+      <%= passenger_form.email_field :email, ignore: :blank %>
+    </div>
+  <% end %>
+  <%= booking_form.submit "Book Flight" %>
 <% end %>
