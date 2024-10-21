@@ -16,6 +16,8 @@
     <tbody>
       <% if @flights.any? %>
         <% @flights.each do |flight| %>
+          <%# TODO: skip flights in the past %>
+          <% next if flight.available_seats <= 0 %>
           <tr>
             <td>
               <%= flight.departure_airport.code %>
@@ -45,6 +47,6 @@
       <% end %>
     </tbody>
   </table>
-  <%= form.hidden_field :number_of_tickets, value: params[:available_seats] || @flights.first&.available_seats %>
+  <%= form.hidden_field :number_of_tickets, value: params[:available_seats] || 1 %>
   <%= form.submit "Book Selected Flight" %>
 <% end %>

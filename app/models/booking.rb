@@ -11,7 +11,7 @@ class Booking < ApplicationRecord
   private
 
   def decrement_seats
-    flight.available_seats -= passengers.count
+    flight.available_seats -= passengers.compact.count
     flight.save
   end
 end

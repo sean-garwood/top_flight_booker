@@ -1,14 +1,19 @@
 class BookingsController < ApplicationController
   def new
-    @flight = Flight.find(booking_params[:flight_id])
     @booking = Booking.new
-    booking_params[:number_of_tickets].to_i.times { @booking.passengers.build }
+    @flight = Flight.find(booking_params[:flight_id])
+    @booking.flight = @flight
+    if booking_params[:number_of_tickets]
+      booking_params[:number_of_tickets].to_i.times { @booking.passengers.build }
+    else
+      @booking.passengers.build
+    end
   end
 
   def create
     @booking = Booking.new(booking_params)
-    @booking.flight = Flight.find(booking_params[:flight_id])
-    @booking.number_of_tickets = @booking.passengers.size
+    @flight = Flight.find(booking_params[:flight_id])
+    @booking.number_of_tickets = @booking.passengers.compact.size
     if @booking.save
       flash[:notice] = "Booking created!"
       redirect_to @booking
@@ -20,6 +25,7 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find(params[:id])
+    @flight = @booking.flight
   end
 
   private

@@ -6,8 +6,8 @@
   <%= booking_form.hidden_field :flight_id, value: @flight.id %>
   <%= booking_form.fields_for :passengers do |passenger_form| %>
     <div class="passenger">
-      <%= passenger_form.text_field :name, ignore: :blank %>
-      <%= passenger_form.email_field :email, ignore: :blank %>
+      <%= passenger_form.text_field :name %>
+      <%= passenger_form.email_field :email %>
     </div>
   <% end %>
   <%= booking_form.submit "Book Flight" %>
