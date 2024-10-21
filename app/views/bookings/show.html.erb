@@ -1,0 +1,25 @@
+<h1>Booking info</h1>
+<p>Here is the information for the booking.</p>
+<div>
+  <h2>Flight info</h2>
+  <p>Here's a summary of your flight information:</p>
+  <ul class="flight-info">
+    <li>Departs from: <%= @booking.flight.departure_airport.code %></li>
+    <li>Departure date: <%= @booking.flight.departure_time %></li>
+    <li>Arrives at: <%= @booking.flight.arrival_airport.code %></li>
+    <li>Arrival time: <%= @booking.flight.arrival_time %></li>
+    <li>Duration: <%= @booking.flight.duration / 60 %>h<%=
+    @booking.flight.duration % 60 %>m</li>
+    <li>Available seats: <%= @booking.flight.available_seats %></li>
+  </ul>
+</div>
+<div>
+  <h2>Passenger info</h2>
+  <p>Here's a summary of passengers included in this booking:</p>
+  <% @booking.passengers.each do |passenger| %>
+    <div class="passenger">
+      <p>Name: <%= passenger.name %></p>
+      <p>Email: <%= passenger.email %></p>
+    </div>
+  <% end %>
+</div>

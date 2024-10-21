@@ -11,11 +11,15 @@ class BookingsController < ApplicationController
     @booking.number_of_tickets = @booking.passengers.size
     if @booking.save
       flash[:notice] = "Booking created!"
-      redirect_to root_path
+      redirect_to @booking
     else
       flash[:alert] = "Booking failed!"
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @booking = Booking.find(params[:id])
   end
 
   private

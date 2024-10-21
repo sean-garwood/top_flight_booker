@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :flights, only: [ :index ]
-  resources :bookings, only: [ :new, :create ]
+  resources :bookings, only: [ :new, :create, :show ]
 
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
