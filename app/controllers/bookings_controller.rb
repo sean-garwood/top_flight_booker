@@ -8,6 +8,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.flight = Flight.find(booking_params[:flight_id])
+    @booking.number_of_tickets = @booking.passengers.size
     if @booking.save
       flash[:notice] = "Booking created!"
       redirect_to root_path
