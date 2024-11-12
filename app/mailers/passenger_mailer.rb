@@ -4,10 +4,14 @@ class PassengerMailer < ApplicationMailer
 
   # confirmation email to be sent after a booking is made
   def booking_confirmation_email
-    @passengers = @booking.passengers
+    @booking = params[:booking]
     @url = booking_url(@booking)
+    @passengers = @booking.passengers
+    @flight = @booking.flight
+    debugger
     @passengers.each do |passenger|
-      mail(to: passenger.email, subject: "Booking Confirmation | flight ##{@booking.flight.id}")
+      @passenger = passenger
+      mail(to: passenger.email, subject: "Booking Confirmation | flight ##{@flight.id}")
     end
   end
 end

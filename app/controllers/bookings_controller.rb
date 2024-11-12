@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
     @flight = Flight.find(booking_params[:flight_id])
     @booking.number_of_tickets = @booking.passengers.compact.size
     if @booking.save
+      PassengerMailer.with(booking: @booking).booking_confirmation_email.deliver_later
       flash[:notice] = "Booking created!"
       redirect_to @booking
     else

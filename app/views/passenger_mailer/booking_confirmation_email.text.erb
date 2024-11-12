@@ -5,5 +5,5 @@ Flight number: <%= @flight.id %>
 Departure: <%= @flight.departure_airport.code %>
 Arrival: <%= @flight.arrival_airport.code %>
 Departure time: <%= @flight.departure_time %>
-You can view your booking <%= link_to "here", show_booking_url(@booking) %>.
+You can view your booking <%= link_to "here", @url %>.
 Thank you for booking with us. We look forward to seeing you on board.
