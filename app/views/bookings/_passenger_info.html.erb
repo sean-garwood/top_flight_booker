@@ -1,18 +1,17 @@
 <h2>Passenger info</h2>
 <p>enter passenger information below:</p>
 <%= form_with model: @booking do |booking_form| %>
-  <%= booking_form.hidden_field :flight_id, value: @flight.id %>
-  <%= booking_form.fields_for :passengers do |passenger_form| %>
-    <div class="passenger">
-      <div>
+  <div data-controller="passenger">
+    <%= booking_form.hidden_field :flight_id, value: @flight.id %>
+    <%= booking_form.fields_for :passengers do |passenger_form| %>
+      <div class="passenger" data-passenger-target="fields">
         <%= passenger_form.label :name %>
         <%= passenger_form.text_field :name %>
-      </div>
-      <div>
         <%= passenger_form.label :email %>
         <%= passenger_form.email_field :email %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+    <button type="button" data-action="passenger#add">Add Passenger</button>
+  </div>
   <%= booking_form.submit "Book Flight" %>
 <% end %>
