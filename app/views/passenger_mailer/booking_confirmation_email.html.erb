@@ -1,0 +1,15 @@
+<h1>Your booking is confirmed, <%= @passenger.name %>.</h1>
+<p>You booked this flight:</p>
+<div>
+  <ul>
+    <li><strong>Flight number:</strong> <%= @flight.id %></li>
+    <li><strong>Departure:</strong> <%= @flight.departure_airport.code %></li>
+    <li><strong>Arrival:</strong> <%= @flight.arrival_airport.code %></li>
+    <li><strong>Departure time:</strong> <%= @flight.departure_time %></li>
+  </ul>
+  <br>
+  <p>
+    You can view your booking <%= link_to "here", show_booking_url(@booking) %>.
+  </p>
+  <p>Thank you for booking with us. We look forward to seeing you on board.</p>
+</div>
