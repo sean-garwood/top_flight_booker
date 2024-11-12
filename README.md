@@ -109,3 +109,17 @@ once the booking is verified.
 1. Make sure your ticketing flow is working properly.
 
 Good work!
+
+### Integrating stimulus
+
+[top|stimulus](https://www.theodinproject.com/lessons/ruby-on-rails-stimulus#assignment)
+
+Project: Go back to your Flight Booker project and improve it
+
+1. Add a controller that allows the user to add another passenger by clicking on
+  an “Add passenger” button, which adds another set of fields to enter the
+  passenger details (hint: have a look at the <template> tag).
+1. Allow removal of existing passengers by clicking a “Remove” button, which
+  removes the one set of passenger fields (make sure submissions to the server
+  still works as expected).
+1. Prevent removing the last set of passenger details.

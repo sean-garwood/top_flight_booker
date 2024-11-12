@@ -1,16 +1,19 @@
 <h2>Enter your desired flight attributes here.</h2>
 <%= form_with method: :get do |form| %>
-  <div>Depart from:
+  <div>
+    <%= form.label :departure_airport_id %>
     <%= form.select :departure_airport, Airport.departure_codes, include_blank:
     true %></div>
   <div>
     <%= form.label :arrival_airport_id %>
     <%= form.select :arrival_airport, Airport.arrival_codes,
     include_blank: true %></div>
-  <div>Required seats:
+  <div>
+    <%= form.label :available_seats %>
     <%= form.select :available_seats, Flight.available_seats,
     include_blank: true %></div>
-  <div>Departure date:
+  <div>
+    <%= form.label :depart_date %>
     <%= form.select :depart_date, Flight.departure_dates, include_blank: true%>
   </div>
   <div>
