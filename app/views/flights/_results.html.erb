@@ -16,8 +16,6 @@
     <tbody>
       <% if @flights.any? %>
         <% @flights.each do |flight| %>
-          <%# TODO: skip flights in the past %>
-          <% next if flight.available_seats <= 0 %>
           <tr>
             <td>
               <%= flight.departure_airport.code %>
@@ -26,16 +24,15 @@
               <%= flight.arrival_airport.code %>
             </td>
             <td>
-              <%= flight.depart_time %>
+              <%= flight.departure_time %>
             </td>
             <td>
-              <%= Time.at(flight.duration * 60).utc.strftime("%H:%M") %>
+              <%= flight.duration_formatted %>
             </td>
             <td>
               <%= flight.available_seats %>
             </td>
             <td>
-              <%= form.label :flight_id %>
               <%= form.radio_button :flight_id, flight.id, data: { available_seats: flight.available_seats } %>
             </td>
           </tr>
@@ -47,6 +44,6 @@
       <% end %>
     </tbody>
   </table>
-  <%= form.hidden_field :number_of_tickets, value: params[:available_seats] || 1 %>
+  <%= form.hidden_field :number_of_tickets, value: params[:available_seats] %>
   <%= form.submit "Book Selected Flight" %>
 <% end %>

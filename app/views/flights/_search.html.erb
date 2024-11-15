@@ -10,11 +10,11 @@
     include_blank: true %></div>
   <div>
     <%= form.label :available_seats %>
-    <%= form.select :available_seats, Flight.available_seats,
-    include_blank: true %></div>
+    <%= form.select :available_seats, Flight.available_seats, default: 1
+    %></div>
   <div>
     <%= form.label :depart_date %>
-    <%= form.select :depart_date, Flight.departure_dates, include_blank: true%>
+    <%= form.select :depart_date, Flight.departure_dates, include_blank: true %>
   </div>
   <div>
     <%= form.submit "Search flights" %>

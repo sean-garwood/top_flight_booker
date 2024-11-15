@@ -1,25 +1,27 @@
-DEPARTURE_AIRPORT_CODES = [ "BWI", "IAD", "LAX", "JFK", "ORD", "SFO", "SEA", "MIA", "DFW", "ATL" ]
-ARRIVAL_AIRPORT_CODES = [ "BOS", "LGA", "MCO", "TPA", "FLL", "DEN", "LAS", "PHX", "SLC", "MSP" ]
-AVAILABLE_SEATS_RANGE = (1..4)
+AIRPORT_CODES = [ "BWI", "IAD", "LAX", "JFK", "ORD",
+                  "ATL", "BOS", "LGA", "MCO", "TPA" ]
+AVAILABLE_SEATS_RANGE = (1..10)
 DAYS_UNTIL_DEPARTURE_RANGE = (1..30)
-DURATION_RANGE = (30..1200)
-FLIGHTS_COUNT = 10
+DURATION_RANGE = (30..300)
 MINUTES_IN_DAY = 1440
 PASSENGER_NAMES = [ "Alice", "Bob", "Charlie", "David", "Eve",
                     "Frank", "Grace", "Heidi", "Ivan", "Judy" ]
 PASSENGER_EMAILS = PASSENGER_NAMES.map { |name| name.downcase + "@example.com" }
+SEED_COUNT = AIRPORT_CODES.size
 
 def make_airports
-  airport_codes = DEPARTURE_AIRPORT_CODES + ARRIVAL_AIRPORT_CODES
-  airport_codes.uniq.each do |code|
+  AIRPORT_CODES.each do |code|
     Airport.find_or_create_by!(code: code)
   end
 end
 
 def make_flights
-  FLIGHTS_COUNT.times do
-    departure_airport = Airport.find_by(code: DEPARTURE_AIRPORT_CODES.sample)
-    arrival_airport = Airport.find_by(code: ARRIVAL_AIRPORT_CODES.sample)
+  SEED_COUNT.times do
+    # can be any airport
+    departure_airport = Airport.find_by(code: AIRPORT_CODES.sample)
+    # arrival can't be the same as departure
+    arrival_codes = AIRPORT_CODES.reject { |code| code == departure_airport.code }
+    arrival_airport = Airport.find_by(code: arrival_codes.sample)
     Flight.create!(
       departure_airport: departure_airport,
       arrival_airport: arrival_airport,

@@ -4,6 +4,7 @@ class Flight < ApplicationRecord
   has_many :bookings
   has_many :passengers, through: :bookings, class_name: "User", foreign_key: "passenger_id"
 
+  default_scope { where(depart_time: Time.zone.now..).where(available_seats: 1..) }
   scope :arrival_airports, ->(arrival_airport_code) do
     if arrival_airport_code.present?
       joins(:arrival_airport).where("airports.code = ?", arrival_airport_code)
@@ -20,15 +21,15 @@ class Flight < ApplicationRecord
     end
   end
 
-  # a readable string representation of the flight arrival time
-  def arrival_time
-    arr = depart_time.localtime + duration.minutes
-    arr.strftime("%Y-%m-%d %H:%M")
-  end
-
   # a readable string representation of the flight departure time
   def departure_time
     depart_time.localtime.strftime("%Y-%m-%d %H:%M")
+  end
+
+  def duration_formatted
+    hours = duration / 60
+    minutes = duration % 60
+    "#{hours}h #{minutes}m"
   end
 
   private
